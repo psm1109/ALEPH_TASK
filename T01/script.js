@@ -3,6 +3,18 @@ const detailContent = document.querySelector('#detail-content');
 const label = revealButton.querySelector('.button-label');
 const symbol = revealButton.querySelector('.button-symbol');
 
+const introRotator = document.querySelector('.intro-rotator');
+const motionToggle = document.querySelector('.intro-motion-toggle');
+const motionLabel = motionToggle.querySelector('.motion-label');
+const motionSymbol = motionToggle.querySelector('.motion-symbol');
+
+motionToggle.addEventListener('click', () => {
+  const isPaused = introRotator.classList.toggle('is-paused');
+  motionToggle.setAttribute('aria-pressed', String(isPaused));
+  motionLabel.textContent = isPaused ? '애니메이션 재생' : '애니메이션 멈춤';
+  motionSymbol.textContent = isPaused ? '▶' : 'Ⅱ';
+});
+
 revealButton.addEventListener('click', () => {
   const isOpen = revealButton.getAttribute('aria-expanded') === 'true';
   revealButton.setAttribute('aria-expanded', String(!isOpen));
