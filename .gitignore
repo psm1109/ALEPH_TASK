@@ -1,4 +1,4 @@
 # Browser verification captures generated during local checks
 /T01/screen-*.png
 /pdf-preview.png
-/images/*.*
+/T01/images/*.png
