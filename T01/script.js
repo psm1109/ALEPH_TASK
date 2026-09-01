@@ -5,13 +5,14 @@ const symbol = revealButton.querySelector('.button-symbol');
 
 const introRotator = document.querySelector('.intro-rotator');
 const motionToggle = document.querySelector('.intro-motion-toggle');
-const motionLabel = motionToggle.querySelector('.motion-label');
 const motionSymbol = motionToggle.querySelector('.motion-symbol');
 
 motionToggle.addEventListener('click', () => {
   const isPaused = introRotator.classList.toggle('is-paused');
   motionToggle.setAttribute('aria-pressed', String(isPaused));
-  motionLabel.textContent = isPaused ? '애니메이션 재생' : '애니메이션 멈춤';
+  const accessibleLabel = isPaused ? '애니메이션 재생' : '애니메이션 멈춤';
+  motionToggle.setAttribute('aria-label', accessibleLabel);
+  motionToggle.setAttribute('title', accessibleLabel);
   motionSymbol.textContent = isPaused ? '▶' : 'Ⅱ';
 });
 
