@@ -45,6 +45,8 @@ const showGalleryImage = (index) => {
 
 const closeGallery = () => {
   galleryModal.hidden = true;
+  document.querySelector('main').inert = false;
+  document.querySelector('footer').inert = false;
   document.body.style.overflow = '';
   lastFocusedElement?.focus();
 };
@@ -54,6 +56,8 @@ galleryTrigger.addEventListener('click', (event) => {
   lastFocusedElement = document.activeElement;
   showGalleryImage(0);
   galleryModal.hidden = false;
+  document.querySelector('main').inert = true;
+  document.querySelector('footer').inert = true;
   document.body.style.overflow = 'hidden';
   galleryModal.querySelector('.gallery-close').focus();
 });
@@ -64,6 +68,16 @@ nextButton.addEventListener('click', () => showGalleryImage(activeImageIndex + 1
 
 document.addEventListener('keydown', (event) => {
   if (galleryModal.hidden) return;
+  if (event.key === 'Tab') {
+    const buttons = [...galleryModal.querySelectorAll('button')];
+    const first = buttons[0];
+    const last = buttons[buttons.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first.focus();
+    }
+  }
   if (event.key === 'Escape') closeGallery();
   if (event.key === 'ArrowLeft') showGalleryImage(activeImageIndex - 1);
   if (event.key === 'ArrowRight') showGalleryImage(activeImageIndex + 1);
