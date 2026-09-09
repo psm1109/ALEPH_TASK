@@ -1,7 +1,11 @@
-const revealButton = document.querySelector('.reveal-button');
-const detailContent = document.querySelector('#detail-content');
-const label = revealButton.querySelector('.button-label');
-const symbol = revealButton.querySelector('.button-symbol');
+const closeAllDetails = document.querySelector('.close-all-details');
+const understandingItems = document.querySelectorAll('#work-style .understanding-item');
+
+closeAllDetails.addEventListener('click', () => {
+  understandingItems.forEach((item) => {
+    item.open = false;
+  });
+});
 
 const introRotator = document.querySelector('.intro-rotator');
 const motionToggle = document.querySelector('.intro-motion-toggle');
@@ -14,14 +18,6 @@ motionToggle.addEventListener('click', () => {
   motionToggle.setAttribute('aria-label', accessibleLabel);
   motionToggle.setAttribute('title', accessibleLabel);
   motionSymbol.textContent = isPaused ? '▶' : 'Ⅱ';
-});
-
-revealButton.addEventListener('click', () => {
-  const isOpen = revealButton.getAttribute('aria-expanded') === 'true';
-  revealButton.setAttribute('aria-expanded', String(!isOpen));
-  detailContent.hidden = isOpen;
-  label.textContent = isOpen ? '함께 일하는 기준 펼치기' : '함께 일하는 기준 접기';
-  symbol.textContent = isOpen ? '+' : '−';
 });
 
 const galleryTrigger = document.querySelector('.learning-gallery-trigger');
